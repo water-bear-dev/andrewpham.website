@@ -28,6 +28,7 @@ import {
   Code
 } from "lucide-react";
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 import { ChatBot } from "./components/ChatBot";
 
 // --- Data ---
@@ -803,6 +804,7 @@ export default function App() {
       </main>
       <ChatBot isOpen={isChatOpen} setIsOpen={setIsChatOpen} />
       <Analytics />
+      <SpeedInsights />
     </div>
   );
 }
