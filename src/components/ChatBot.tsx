@@ -77,16 +77,16 @@ export function ChatBot({ isOpen, setIsOpen }: ChatBotProps) {
     } catch (error) {
       console.error("Chat error:", error);
       const errorMsgId = Date.now().toString() + '-error';
-      setMessages(prev => [...prev, { id: errorMsgId, role: 'model', text: "Sorry, I encountered an error. Please try again later or contact Andrew directly at andrew.ph4m@gmail.com." }]);
+      setMessages(prev => [...prev, { id: errorMsgId, role: 'model', text: "Sorry, I encountered an error. Please try again later or contact Andrew directly at andrew.hn.pham@gmail.com." }]);
     } finally {
       setIsLoading(false);
     }
   };
 
   const handleFeedback = (id: string, type: 'up' | 'down') => {
-    setMessages(prev => prev.map(msg => 
-      msg.id === id 
-        ? { ...msg, feedback: msg.feedback === type ? null : type } 
+    setMessages(prev => prev.map(msg =>
+      msg.id === id
+        ? { ...msg, feedback: msg.feedback === type ? null : type }
         : msg
     ));
   };
@@ -113,7 +113,7 @@ export function ChatBot({ isOpen, setIsOpen }: ChatBotProps) {
                   <p className="text-xs text-zinc-500">Ask about my experience</p>
                 </div>
               </div>
-              <button 
+              <button
                 onClick={() => setIsOpen(false)}
                 className="p-2 text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800 rounded-lg transition-colors"
               >
@@ -137,14 +137,14 @@ export function ChatBot({ isOpen, setIsOpen }: ChatBotProps) {
                           <Markdown>{msg.text}</Markdown>
                         </div>
                         <div className="flex items-center gap-2 mt-1 pt-2 border-t border-zinc-700/50">
-                          <button 
+                          <button
                             onClick={() => handleFeedback(msg.id, 'up')}
                             className={`p-1 rounded hover:bg-zinc-700 transition-colors ${msg.feedback === 'up' ? 'text-green-400' : 'text-zinc-500 hover:text-zinc-300'}`}
                             title="Helpful"
                           >
                             <ThumbsUp className="w-3.5 h-3.5" />
                           </button>
-                          <button 
+                          <button
                             onClick={() => handleFeedback(msg.id, 'down')}
                             className={`p-1 rounded hover:bg-zinc-700 transition-colors ${msg.feedback === 'down' ? 'text-red-400' : 'text-zinc-500 hover:text-zinc-300'}`}
                             title="Not helpful"
@@ -195,7 +195,7 @@ export function ChatBot({ isOpen, setIsOpen }: ChatBotProps) {
                 placeholder="Ask about my skills..."
                 className="flex-1 bg-zinc-900 border border-zinc-800 rounded-xl px-4 py-2 text-sm text-zinc-100 focus:border-blue-500 outline-none transition-all"
               />
-              <button 
+              <button
                 type="submit"
                 disabled={!input.trim() || isLoading}
                 className="p-3 bg-blue-600 text-white rounded-xl hover:bg-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center justify-center shrink-0"

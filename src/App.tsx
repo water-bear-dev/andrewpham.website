@@ -36,7 +36,7 @@ export const CV_DATA = {
   title: "Senior Software & Data Engineer",
   specialization: "AWS, Python & AI",
   location: "Australia",
-  email: "andrew.ph4m@gmail.com",
+  email: "andrew.hn.pham@gmail.com",
   phone: "+61 401 519 465",
   linkedin: "andrewhnpham",
   website: "andrewpham.website",
