@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { 
-  Github, 
-  Linkedin, 
-  Mail, 
-  Award, 
-  BookOpen, 
-  Briefcase, 
-  Code2, 
-  Database, 
-  Cloud, 
-  Cpu, 
+import {
+  Github,
+  Linkedin,
+  Mail,
+  Award,
+  BookOpen,
+  Briefcase,
+  Code2,
+  Database,
+  Cloud,
+  Cpu,
   Terminal,
   Zap,
   Layers,
@@ -59,7 +59,7 @@ export const CV_DATA = {
   introduction: {
     greeting: "Hello there!",
     welcome: "I'm Andrew Pham, and it's genuinely a pleasure to welcome you to my corner. Thank you for taking the time to visit my site.",
-    professional: "I am a Senior Software & Data Engineer with 5+ years of experience across multiple industries, specializing in building robust, efficient, and scalable data pipelines.",
+    professional: "I am a Senior Software & Data Engineer with 5+ years of experience across multiple industries, specialising in building robust, efficient, and scalable data pipelines.",
     summary: "Skilled in Python, TypeScript, data streaming, and AWS, I have a proven track record of designing fault-tolerant cloud infrastructures and turning raw data into actionable insights.",
     achievements: [
       "Designed, deployed, and maintained large-scale, fault-tolerant critical cloud infrastructures in AWS.",
@@ -86,13 +86,13 @@ export const CV_DATA = {
         {
           title: "Senior Software & Data Engineer",
           period: "November 2024 – Present",
-          team: "Frontline and Sales Technology (FAST)",
+          team: "Customer Contact Centre (CCT) - formerly Frontline and Sales Technology (FAST)",
           description: "My responsibilities include designing and implementing scalable, high-performance data pipelines to process and transform large volumes of structured and unstructured data using Spark, Python and API Gateway, reducing data processing time by 40% and enabling near-real-time insights for business stakeholders.",
           highlights: [
             "Built real-time streaming data pipelines using Apache Kafka and Kinesis, enabling the detection of anomalies and fraud in customer interactions.",
             "Implemented load balancers, real-time monitoring and alerting using CloudWatch, reducing MTTD and MTTR by 50%."
           ],
-          techStack: ["TypeScript", "AWS", "Splunk", "PowerBI", "SQL"]
+          techStack: ["TypeScript", "AWS", "OpenSearch", "Python", "SQL"]
         },
         {
           title: "Data Engineer",
@@ -105,7 +105,7 @@ export const CV_DATA = {
             "Improved the development pipeline process, reducing automated testing time by 32%.",
             "Winner of 2022 NAB’s Expert coding competition."
           ],
-          techStack: ["TypeScript", "AWS", "Splunk", "PowerBI", "SQL"]
+          techStack: ["TypeScript", "AWS", "Splunk", "SQL"]
         }
       ]
     },
@@ -136,7 +136,7 @@ export const CV_DATA = {
             "UI reorganisation and integrated React-calendar for assessment planning.",
             "Integrated ChatGPT to summarise key focus areas for students after assessment results."
           ],
-          techStack: ["React", "Redux", "TypeScript"]
+          techStack: ["React", "Redux", "TypeScript", "ChatGPT"]
         }
       ]
     },
@@ -165,7 +165,7 @@ export const CV_DATA = {
         {
           title: "Database Developer",
           period: "October 2020 – May 2021",
-          description: "Spearheaded the redesign and development of database architecture, migrating from Microsoft Access to Microsoft SQL Server. Built analytics dashboards using Tableau for research insights into patient behavior.",
+          description: "Spearheaded the redesign and development of database architecture, migrating from Microsoft Access to Microsoft SQL Server. Built analytics dashboards using Tableau for research insights into patient behaviour.",
           highlights: [
             "Led migration to MS SQL Server, enhancing scalability and reducing storage costs by $15k.",
             "Deployed Tableau reporting dashboards for key insights into ambulance responses."
@@ -192,22 +192,22 @@ export const CV_DATA = {
     }
   ],
   certifications: [
-    { title: "AWS Solutions Architect Professional", issuer: "Amazon Web Services", date: "January 2025" },
-    { title: "AWS Data Engineer Associate", issuer: "Amazon Web Services", date: "July 2024" },
-    { title: "Certified Banking Fundamentals", issuer: "Financial Services Institute of Australasia", date: "July 2024" },
-    { title: "AWS Solutions Architect Associate", issuer: "Amazon Web Services", date: "December 2023" }
+    { title: "Solutions Architect Professional", issuer: "Amazon Web Services", date: "January 2025" },
+    { title: "Data Engineer Associate", issuer: "Amazon Web Services", date: "July 2024" },
+    { title: "Certified Banking Fundamentals", issuer: "FINSIA", date: "July 2024" },
+    { title: "Solutions Architect Associate", issuer: "Amazon Web Services", date: "December 2023" }
   ],
   education: [
-    { 
-      degree: "Master of Information Technology", 
-      school: "Monash University", 
+    {
+      degree: "Master of Information Technology",
+      school: "Monash University",
       location: "Clayton, VIC, Australia",
       description: "My academic journey began as an international student at Monash University. Completing both my bachelor's and master's degrees provided me with a robust foundation in web development, data management, and project management—skills that continue to guide my professional path.",
       extra: "Outside of academics, I was deeply involved in the Monash Vietnamese International Students' Club for over four years, developing strong communication and leadership skills."
     },
-    { 
-      degree: "Bachelor of Information Technology", 
-      school: "Monash University", 
+    {
+      degree: "Bachelor of Information Technology",
+      school: "Monash University",
       location: "Clayton, VIC, Australia",
       description: "Explorations in business IT, mobile app development, governance, software, and data management ignited my passion for data engineering and cloud technologies."
     }
@@ -271,9 +271,9 @@ export default function App() {
     <div className="min-h-screen bg-[#09090b] text-zinc-400 font-sans selection:bg-blue-500/30">
       {/* Background Grid Effect */}
       <div className="fixed inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none"></div>
-      
+
       <main className="relative max-w-5xl mx-auto px-6 pt-8 pb-20 lg:pt-12 lg:pb-32">
-        
+
         {/* Tab Navigation */}
         <nav className="flex flex-wrap items-center justify-center gap-2 mb-12 p-1 bg-zinc-900/50 border border-zinc-800 rounded-2xl backdrop-blur-md sticky top-4 z-50">
           {tabs.map((tab) => {
@@ -285,8 +285,8 @@ export default function App() {
                 onClick={() => handleTabChange(tab.id)}
                 className={`
                   flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-medium transition-all duration-300
-                  ${isActive 
-                    ? "bg-blue-500 text-white shadow-[0_0_20px_rgba(59,130,246,0.3)]" 
+                  ${isActive
+                    ? "bg-blue-500 text-white shadow-[0_0_20px_rgba(59,130,246,0.3)]"
                     : "text-zinc-500 hover:text-zinc-300 hover:bg-zinc-800/50"}
                 `}
               >
@@ -311,9 +311,9 @@ export default function App() {
                 {/* Static Hero Section */}
                 <div className="relative h-[40vh] min-h-[320px] w-full mb-16 rounded-[2.5rem] overflow-hidden border border-zinc-800/50 group">
                   <div className="absolute inset-0">
-                    <img 
-                      src="https://picsum.photos/seed/data-engineer/1920/1080?blur=2" 
-                      alt="Hero Background" 
+                    <img
+                      src="https://picsum.photos/seed/data-engineer/1920/1080?blur=2"
+                      alt="Hero Background"
                       className="w-full h-full object-cover"
                       referrerPolicy="no-referrer"
                     />
@@ -340,14 +340,14 @@ export default function App() {
                         Building the foundations for intelligent, data-driven innovation.
                       </p>
                       <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
-                        <button 
+                        <button
                           onClick={() => setIsChatOpen(true)}
                           className="px-6 py-3 bg-blue-600 text-white font-medium rounded-xl hover:bg-blue-500 transition-colors flex items-center gap-2 w-full sm:w-auto justify-center"
                         >
                           <Bot className="w-5 h-5" />
                           Talk to AI Assistant
                         </button>
-                        <a 
+                        <a
                           href={cvData.calendly}
                           target="_blank"
                           rel="noopener noreferrer"
@@ -364,14 +364,14 @@ export default function App() {
 
                 <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
                   <div className="max-w-2xl">
-                    <motion.h1 
+                    <motion.h1
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
                       className="text-4xl md:text-6xl font-bold text-zinc-100 tracking-tighter mb-4"
                     >
                       {cvData.introduction.greeting}
                     </motion.h1>
-                    <motion.p 
+                    <motion.p
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: 0.1 }}
@@ -419,7 +419,7 @@ export default function App() {
                       <p className="mb-6">
                         Are you currently searching for a dedicated and skilled <strong className="text-zinc-100">software & data engineer</strong> to join your team? I invite you to explore my experience and qualifications in more detail.
                       </p>
-                      <button 
+                      <button
                         onClick={() => handleTabChange("resume")}
                         className="px-8 py-4 bg-zinc-100 text-zinc-900 font-bold rounded-2xl hover:bg-blue-400 hover:text-white transition-all flex items-center gap-2 group"
                       >
@@ -509,12 +509,12 @@ export default function App() {
 
                   <div className="p-10 bg-blue-500/5 border border-blue-500/10 rounded-3xl flex flex-col md:flex-row items-center justify-between gap-8">
                     <div className="space-y-4 max-w-2xl">
-                      <h3 className="text-3xl font-bold text-zinc-100">Ready to optimize your infrastructure?</h3>
+                      <h3 className="text-3xl font-bold text-zinc-100">Ready to optimise your infrastructure?</h3>
                       <p className="text-lg text-zinc-400">
                         Let's discuss your current challenges and see how I can help you build faster, more reliable, and cost-effective solutions.
                       </p>
                     </div>
-                    <a 
+                    <a
                       href={cvData.calendly}
                       target="_blank"
                       rel="noopener noreferrer"
@@ -547,7 +547,7 @@ export default function App() {
                       }[skillGroup.category] || Terminal;
 
                       return (
-                        <motion.div 
+                        <motion.div
                           key={skillGroup.category}
                           initial={{ opacity: 0, scale: 0.95 }}
                           animate={{ opacity: 1, scale: 1 }}
@@ -594,7 +594,7 @@ export default function App() {
                                   {role.period}
                                 </span>
                               </div>
-                              
+
                               {role.description && (
                                 <p className="text-zinc-300 leading-relaxed mb-6 text-lg">
                                   {role.description}
@@ -673,7 +673,7 @@ export default function App() {
                           <h4 className="text-2xl font-bold text-zinc-100">{edu.degree}</h4>
                           <p className="text-blue-400 font-medium mt-1">{edu.school}</p>
                           <p className="text-sm text-zinc-600 mt-1">{edu.location}</p>
-                          
+
                           {edu.description && (
                             <p className="mt-6 text-zinc-300 leading-relaxed text-lg">
                               {edu.description}
@@ -736,7 +736,7 @@ export default function App() {
                         </div>
                       </div>
 
-                      <a 
+                      <a
                         href={cvData.calendly}
                         target="_blank"
                         rel="noopener noreferrer"
@@ -790,7 +790,7 @@ export default function App() {
             <button onClick={() => handleTabChange("contact")} className="text-sm hover:text-blue-400 transition-colors flex items-center gap-2">
               <Mail className="w-4 h-4" /> Contact
             </button>
-            <button 
+            <button
               onClick={() => window.print()}
               className="text-sm hover:text-blue-400 transition-colors flex items-center gap-2"
             >
