@@ -5,7 +5,10 @@ import { GoogleGenAI } from '@google/genai';
 import Markdown from 'react-markdown';
 import { CV_DATA } from '../App';
 
-const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+// Fallback for Vercel if process.env gets stripped completely
+const apiKey = typeof process !== 'undefined' && process.env ? process.env.GEMINI_API_KEY : import.meta.env?.VITE_GEMINI_API_KEY;
+
+const ai = new GoogleGenAI({ apiKey: apiKey || 'missing_key' });
 
 const EXAMPLE_PROMPTS = [
   "What services do you offer?",
