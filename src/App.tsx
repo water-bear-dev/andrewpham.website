@@ -236,12 +236,12 @@ export const CV_DATA = {
       github: "https://github.com/water-bear-dev/Cost-Aware-Market-Insights-Engine",
       images: [
         { src: "/images/architecture-diagram.png", alt: "System architecture diagram" },
-        { src: "/images/manage-dashboard.png", alt: "Manage dashboard with tracked assets" },
+        { src: "/images/asset-details.png", alt: "Search and compare asset details" },
         { src: "/images/daily-discovery-picks.png", alt: "Daily discovery picks" },
-        { src: "/images/discover-news.png", alt: "Discover news feed" },
-        { src: "/images/asset-details.png", alt: "Asset details and search" },
-        { src: "/images/qmj-screener.png", alt: "QMJ quantitative screener" },
-        { src: "/images/finops-dashboard.png", alt: "FinOps cost dashboard" }
+        { src: "/images/discover-news.png", alt: "Manage dashboard with news feed" },
+        { src: "/images/finops-dashboard.png", alt: "FinOps cost dashboard" },
+        { src: "/images/manage-dashboard.png", alt: "Tracked assets performance chart" },
+        { src: "/images/qmj-screener.png", alt: "QMJ quantitative screener" }
       ]
     },
     {
@@ -249,9 +249,7 @@ export const CV_DATA = {
       description: "Privacy-first React/TypeScript dashboard for tracking net worth and FIRE progress. Runs entirely in the browser via localStorage, with portfolio analytics, budgeting, and a Monte Carlo retirement simulator.",
       github: "https://github.com/water-bear-dev/-WIP-FinDash---Net-Worth-FIRE-Tracker",
       wip: true,
-      images: [
-        { src: "/images/dashboard.png", alt: "FinDash net worth dashboard" }
-      ]
+      images: []
     }
   ]
 };
@@ -456,11 +454,15 @@ export default function App() {
                         {(cvData.projects as any[]).map((project, i) => (
                           <div key={i} className="p-5 bg-zinc-900/50 border border-zinc-800 rounded-2xl hover:border-blue-500/30 transition-all group flex flex-col">
                             <div className="aspect-video rounded-xl overflow-hidden border border-zinc-800 mb-4">
-                              <img
-                                src={project.images[0].src}
-                                alt={project.images[0].alt}
-                                className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-300"
-                              />
+                              {project.images.length > 0 ? (
+                                <img
+                                  src={project.images[0].src}
+                                  alt={project.images[0].alt}
+                                  className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-300"
+                                />
+                              ) : (
+                                <div className="w-full h-full flex items-center justify-center bg-zinc-800/50 text-zinc-600 text-sm">Screenshot coming soon</div>
+                              )}
                             </div>
                             <div className="flex items-center gap-2 mb-2">
                               <h3 className="text-lg font-bold text-zinc-100 group-hover:text-blue-400 transition-colors">{project.name}</h3>
@@ -647,26 +649,28 @@ export default function App() {
                           </a>
                         )}
                       </div>
-                      {project.images.length === 1 ? (
-                        <div className="rounded-2xl overflow-hidden border border-zinc-800">
-                          <img
-                            src={project.images[0].src}
-                            alt={project.images[0].alt}
-                            className="w-full object-cover object-top"
-                          />
-                        </div>
-                      ) : (
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                          {project.images.map((image: { src: string; alt: string }, j: number) => (
-                            <div key={j} className="rounded-xl overflow-hidden border border-zinc-800">
-                              <img
-                                src={image.src}
-                                alt={image.alt}
-                                className="w-full aspect-video object-cover object-top"
-                              />
-                            </div>
-                          ))}
-                        </div>
+                      {project.images.length > 0 && (
+                        project.images.length === 1 ? (
+                          <div className="rounded-2xl overflow-hidden border border-zinc-800">
+                            <img
+                              src={project.images[0].src}
+                              alt={project.images[0].alt}
+                              className="w-full object-cover object-top"
+                            />
+                          </div>
+                        ) : (
+                          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                            {project.images.map((image: { src: string; alt: string }, j: number) => (
+                              <div key={j} className="rounded-xl overflow-hidden border border-zinc-800">
+                                <img
+                                  src={image.src}
+                                  alt={image.alt}
+                                  className="w-full aspect-video object-cover object-top"
+                                />
+                              </div>
+                            ))}
+                          </div>
+                        )
                       )}
                     </div>
                   ))}
