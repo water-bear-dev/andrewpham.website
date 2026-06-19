@@ -259,6 +259,14 @@ export const CV_DATA = {
         { src: "/images/screenshot-investments.png", alt: "FinDash investment holdings and gains breakdown" },
         { src: "/images/screenshot-fire.png", alt: "FinDash FIRE journey with Monte Carlo simulator" }
       ]
+    },
+    {
+      name: "AWS Certification Prep Engine",
+      description: "Interactive TypeScript study platform for AWS certifications, covering eight exams including Solutions Architect, Machine Learning Engineer, and Data Engineer. Features practice mode with instant explanations, timed exam simulation, domain-targeted drills, and post-exam proficiency breakdowns — all in a responsive dark-mode UI.",
+      github: "https://github.com/water-bear-dev/aws-cert-prep",
+      images: [
+        { src: "/images/dashboard.png", alt: "AWS Certification Prep portal with practice exams" }
+      ]
     }
   ]
 };
