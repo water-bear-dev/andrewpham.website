@@ -25,7 +25,8 @@ import {
   Calendar,
   DollarSign,
   Search,
-  Code
+  Code,
+  FolderGit2
 } from "lucide-react";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
@@ -218,6 +219,40 @@ export const CV_DATA = {
     { title: "Systems Developer Coding Challenge – Winner", issuer: "AWS", date: "November 2025" },
     { title: "Tri-Country Coding Tournament - Winner", issuer: "NAB", date: "April 2023" },
     { title: "Expert Coding Competition - Winner", issuer: "NAB", date: "2022" }
+  ],
+  projects: [
+    {
+      name: "AU Real Estate Insights",
+      description: "Chrome extension and Vercel backend that enriches realestate.com.au and domain.com.au listings with verified land size, nearby school catchments, and Better Education ratings. Uses a hybrid architecture with client-side scraping via residential IP and serverless geocoding.",
+      github: "https://github.com/water-bear-dev/au-rea-insights",
+      demo: "https://au-rea-insights.vercel.app",
+      images: [
+        { src: "/images/au-rea-insights.png", alt: "AU Real Estate Insights extension on a property listing" }
+      ]
+    },
+    {
+      name: "Cost-Aware Market Insights Engine",
+      description: "Containerized FastAPI application with LangGraph orchestration that ingests live market data, synthesizes AI insights via Bedrock/Ollama, and surfaces them on a glassmorphic dashboard — with strict FinOps budget gates that throttle LLM spend.",
+      github: "https://github.com/water-bear-dev/Cost-Aware-Market-Insights-Engine",
+      images: [
+        { src: "/images/architecture-diagram.png", alt: "System architecture diagram" },
+        { src: "/images/manage-dashboard.png", alt: "Manage dashboard with tracked assets" },
+        { src: "/images/daily-discovery-picks.png", alt: "Daily discovery picks" },
+        { src: "/images/discover-news.png", alt: "Discover news feed" },
+        { src: "/images/asset-details.png", alt: "Asset details and search" },
+        { src: "/images/qmj-screener.png", alt: "QMJ quantitative screener" },
+        { src: "/images/finops-dashboard.png", alt: "FinOps cost dashboard" }
+      ]
+    },
+    {
+      name: "FinDash",
+      description: "Privacy-first React/TypeScript dashboard for tracking net worth and FIRE progress. Runs entirely in the browser via localStorage, with portfolio analytics, budgeting, and a Monte Carlo retirement simulator.",
+      github: "https://github.com/water-bear-dev/-WIP-FinDash---Net-Worth-FIRE-Tracker",
+      wip: true,
+      images: [
+        { src: "/images/dashboard.png", alt: "FinDash net worth dashboard" }
+      ]
+    }
   ]
 };
 
@@ -265,6 +300,7 @@ export default function App() {
   const tabs = [
     { id: "welcome", label: "Welcome", icon: Globe },
     { id: "services", label: "Services", icon: Layers },
+    { id: "projects", label: "Projects", icon: FolderGit2 },
     { id: "resume", label: "Resume", icon: FileText },
     { id: "contact", label: "Contact", icon: Mail },
   ];
@@ -347,7 +383,7 @@ export default function App() {
                           className="px-6 py-3 bg-blue-600 text-white font-medium rounded-xl hover:bg-blue-500 transition-colors flex items-center gap-2 w-full sm:w-auto justify-center"
                         >
                           <Bot className="w-5 h-5" />
-                          Talk to AI Assistant
+                          Talk to my AI Assistant
                         </button>
                         <a
                           href={cvData.calendly}
@@ -409,6 +445,50 @@ export default function App() {
                           </li>
                         ))}
                       </ul>
+                    </div>
+
+                    <div className="pt-8 border-t border-zinc-800">
+                      <h2 className="text-2xl font-bold text-zinc-100 mb-6 flex items-center gap-3">
+                        <FolderGit2 className="w-5 h-5 text-blue-400" />
+                        Featured Projects
+                      </h2>
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                        {(cvData.projects as any[]).map((project, i) => (
+                          <div key={i} className="p-5 bg-zinc-900/50 border border-zinc-800 rounded-2xl hover:border-blue-500/30 transition-all group flex flex-col">
+                            <div className="aspect-video rounded-xl overflow-hidden border border-zinc-800 mb-4">
+                              <img
+                                src={project.images[0].src}
+                                alt={project.images[0].alt}
+                                className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-300"
+                              />
+                            </div>
+                            <div className="flex items-center gap-2 mb-2">
+                              <h3 className="text-lg font-bold text-zinc-100 group-hover:text-blue-400 transition-colors">{project.name}</h3>
+                              {project.wip && (
+                                <span className="px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider bg-amber-500/10 border border-amber-500/30 text-amber-400 rounded-full">WIP</span>
+                              )}
+                            </div>
+                            <p className="text-sm text-zinc-400 leading-relaxed flex-grow mb-4 line-clamp-3">{project.description}</p>
+                            <a
+                              href={project.github}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-2 text-sm text-blue-400 hover:text-blue-300 transition-colors"
+                            >
+                              <Github className="w-4 h-4" />
+                              View on GitHub
+                              <ExternalLink className="w-3 h-3" />
+                            </a>
+                          </div>
+                        ))}
+                      </div>
+                      <button
+                        onClick={() => handleTabChange("projects")}
+                        className="px-8 py-4 bg-zinc-100 text-zinc-900 font-bold rounded-2xl hover:bg-blue-400 hover:text-white transition-all flex items-center gap-2 group"
+                      >
+                        View All Projects
+                        <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                      </button>
                     </div>
 
                     <p className="text-zinc-400">{cvData.introduction.closing}</p>
@@ -526,6 +606,70 @@ export default function App() {
                       Book a Chat
                     </a>
                   </div>
+                </div>
+              </section>
+            )}
+
+            {activeTab === "projects" && (
+              <section className="mb-24">
+                <SectionHeader icon={FolderGit2} title="Projects" />
+                <div className="space-y-12">
+                  {(cvData.projects as any[]).map((project, i) => (
+                    <div key={i} className="p-8 bg-zinc-900/50 border border-zinc-800 rounded-3xl hover:border-blue-500/30 transition-all">
+                      <div className="flex flex-wrap items-center gap-3 mb-4">
+                        <h3 className="text-2xl font-bold text-zinc-100">{project.name}</h3>
+                        {project.wip && (
+                          <span className="px-3 py-1 text-xs font-bold uppercase tracking-wider bg-amber-500/10 border border-amber-500/30 text-amber-400 rounded-full">Work in Progress</span>
+                        )}
+                      </div>
+                      <p className="text-zinc-400 text-base leading-relaxed mb-6 max-w-3xl">{project.description}</p>
+                      <div className="flex flex-wrap items-center gap-4 mb-8">
+                        <a
+                          href={project.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 px-4 py-2 bg-zinc-800 border border-zinc-700 rounded-xl text-sm text-zinc-200 hover:border-blue-500/50 hover:text-blue-400 transition-all"
+                        >
+                          <Github className="w-4 h-4" />
+                          GitHub
+                          <ExternalLink className="w-3 h-3" />
+                        </a>
+                        {project.demo && (
+                          <a
+                            href={project.demo}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-2 px-4 py-2 bg-zinc-800 border border-zinc-700 rounded-xl text-sm text-zinc-200 hover:border-blue-500/50 hover:text-blue-400 transition-all"
+                          >
+                            <Globe className="w-4 h-4" />
+                            Live Demo
+                            <ExternalLink className="w-3 h-3" />
+                          </a>
+                        )}
+                      </div>
+                      {project.images.length === 1 ? (
+                        <div className="rounded-2xl overflow-hidden border border-zinc-800">
+                          <img
+                            src={project.images[0].src}
+                            alt={project.images[0].alt}
+                            className="w-full object-cover object-top"
+                          />
+                        </div>
+                      ) : (
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                          {project.images.map((image: { src: string; alt: string }, j: number) => (
+                            <div key={j} className="rounded-xl overflow-hidden border border-zinc-800">
+                              <img
+                                src={image.src}
+                                alt={image.alt}
+                                className="w-full aspect-video object-cover object-top"
+                              />
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  ))}
                 </div>
               </section>
             )}
@@ -792,12 +936,13 @@ export default function App() {
             <button onClick={() => handleTabChange("contact")} className="text-sm hover:text-blue-400 transition-colors flex items-center gap-2">
               <Mail className="w-4 h-4" /> Contact
             </button>
-            <button
-              onClick={() => window.print()}
+            <a
+              href="/AndrewPham_Resume.pdf"
+              download
               className="text-sm hover:text-blue-400 transition-colors flex items-center gap-2"
             >
               <FileText className="w-4 h-4" /> Download CV
-            </button>
+            </a>
           </div>
         </footer>
 
