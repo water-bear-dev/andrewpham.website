@@ -226,7 +226,6 @@ export const CV_DATA = {
       name: "AU Real Estate Insights",
       description: "Chrome extension and Vercel backend that enriches realestate.com.au and domain.com.au listings with verified land size, nearby school catchments, and Better Education ratings. Uses a hybrid architecture with client-side scraping via residential IP and serverless geocoding.",
       github: "https://github.com/water-bear-dev/au-rea-insights",
-      demo: "https://au-rea-insights.vercel.app",
       images: [
         { src: "/images/au-rea-insights.png", alt: "AU Real Estate Insights extension on a property listing" }
       ]
@@ -246,6 +245,14 @@ export const CV_DATA = {
       ]
     },
     {
+      name: "AWS Certification Prep Engine",
+      description: "Interactive TypeScript study platform for AWS certifications, covering eight exams including Solutions Architect, Machine Learning Engineer, and Data Engineer. Features practice mode with instant explanations, timed exam simulation, domain-targeted drills, and post-exam proficiency breakdowns — all in a responsive dark-mode UI.",
+      github: "https://github.com/water-bear-dev/aws-cert-prep",
+      images: [
+        { src: "/images/dashboard.png", alt: "AWS Certification Prep portal with practice exams" }
+      ]
+    },
+    {
       name: "FinDash",
       description: "FinDash is a privacy-first personal finance dashboard built with React 19, TypeScript, and Vite that helps you track net worth and progress toward FIRE (Financial Independence, Retire Early). All financial data lives in your browser via localStorage — no external database, no account required. The net worth dashboard aggregates assets and liabilities in real time, while the dedicated FIRE journey view runs Monte Carlo simulations across thousands of market scenarios to estimate retirement survival probability. A full budgeting engine handles recurring incomes and expenses, cash-flow variance analysis, and CSV import, with a financial calendar that visualises when bills, salary, and dividends land each month. The investment module tracks holdings with live yfinance pricing, XIRR/TWR performance, FIFO gains, dividend yield-on-cost, and an algorithmic rebalancing engine that calculates exact buy/sell trades to hit target allocations. Optional Google Gemini integration adds a conversational assistant for logging expenses and summarising your financial position. Automated hourly backups to a local sync folder (Google Drive, OneDrive, etc.) keep your data portable without ever leaving your device.",
       github: "https://github.com/water-bear-dev/-WIP-FinDash---Net-Worth-FIRE-Tracker",
@@ -258,14 +265,6 @@ export const CV_DATA = {
         { src: "/images/screenshot-ledger.png", alt: "FinDash portfolio ledger and transactions" },
         { src: "/images/screenshot-investments.png", alt: "FinDash investment holdings and gains breakdown" },
         { src: "/images/screenshot-fire.png", alt: "FinDash FIRE journey with Monte Carlo simulator" }
-      ]
-    },
-    {
-      name: "AWS Certification Prep Engine",
-      description: "Interactive TypeScript study platform for AWS certifications, covering eight exams including Solutions Architect, Machine Learning Engineer, and Data Engineer. Features practice mode with instant explanations, timed exam simulation, domain-targeted drills, and post-exam proficiency breakdowns — all in a responsive dark-mode UI.",
-      github: "https://github.com/water-bear-dev/aws-cert-prep",
-      images: [
-        { src: "/images/dashboard.png", alt: "AWS Certification Prep portal with practice exams" }
       ]
     }
   ]
@@ -362,6 +361,96 @@ const ProjectImageCarousel: React.FC<ProjectImageCarouselProps> = ({ images }) =
           </div>
         </div>
       )}
+    </div>
+  );
+};
+
+interface Project {
+  name: string;
+  description: string;
+  github: string;
+  wip?: boolean;
+  images: { src: string; alt: string }[];
+}
+
+interface FeaturedProjectsCarouselProps {
+  projects: Project[];
+}
+
+const FeaturedProjectsCarousel: React.FC<FeaturedProjectsCarouselProps> = ({ projects }) => {
+  const [index, setIndex] = useState(0);
+
+  const goTo = (next: number) => {
+    setIndex((next + projects.length) % projects.length);
+  };
+
+  const project = projects[index];
+
+  return (
+    <div className="relative mb-8 px-2">
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={index}
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: -20 }}
+          transition={{ duration: 0.25 }}
+          className="relative p-5 bg-zinc-900/50 border border-zinc-800 rounded-2xl hover:border-blue-500/30 transition-all group"
+        >
+          <div className="aspect-video rounded-xl overflow-hidden border border-zinc-800 mb-4">
+            {project.images.length > 0 ? (
+              <img
+                src={project.images[0].src}
+                alt={project.images[0].alt}
+                className="w-full h-full object-cover object-top"
+              />
+            ) : (
+              <div className="w-full h-full flex items-center justify-center bg-zinc-800/50 text-zinc-600 text-sm">Screenshot coming soon</div>
+            )}
+          </div>
+          <div className="flex items-center gap-2 mb-2">
+            <h3 className="text-lg font-bold text-zinc-100 group-hover:text-blue-400 transition-colors">{project.name}</h3>
+            {project.wip && (
+              <span className="px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider bg-amber-500/10 border border-amber-500/30 text-amber-400 rounded-full">WIP</span>
+            )}
+          </div>
+          <p className="text-sm text-zinc-400 leading-relaxed mb-4 line-clamp-3">{project.description}</p>
+          <a
+            href={project.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-sm text-blue-400 hover:text-blue-300 transition-colors"
+          >
+            <Github className="w-4 h-4" />
+            View on GitHub
+            <ExternalLink className="w-3 h-3" />
+          </a>
+          <button
+            onClick={() => goTo(index - 1)}
+            className="absolute left-3 top-[calc(50%-2rem)] -translate-y-1/2 p-2 bg-zinc-900/90 border border-zinc-700 rounded-full text-zinc-300 hover:text-white hover:border-blue-500/50 transition-all"
+            aria-label="Previous project"
+          >
+            <ChevronLeft className="w-5 h-5" />
+          </button>
+          <button
+            onClick={() => goTo(index + 1)}
+            className="absolute right-3 top-[calc(50%-2rem)] -translate-y-1/2 p-2 bg-zinc-900/90 border border-zinc-700 rounded-full text-zinc-300 hover:text-white hover:border-blue-500/50 transition-all"
+            aria-label="Next project"
+          >
+            <ChevronRight className="w-5 h-5" />
+          </button>
+        </motion.div>
+      </AnimatePresence>
+      <div className="flex items-center justify-center gap-1.5 mt-4">
+        {projects.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => setIndex(i)}
+            className={`h-2 rounded-full transition-all ${i === index ? "bg-blue-400 w-5" : "bg-zinc-600 hover:bg-zinc-500 w-2"}`}
+            aria-label={`Go to project ${i + 1}`}
+          />
+        ))}
+      </div>
     </div>
   );
 };
@@ -531,40 +620,7 @@ export default function App() {
                         <FolderGit2 className="w-5 h-5 text-blue-400" />
                         Featured Projects
                       </h2>
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                        {(cvData.projects as any[]).map((project, i) => (
-                          <div key={i} className="p-5 bg-zinc-900/50 border border-zinc-800 rounded-2xl hover:border-blue-500/30 transition-all group flex flex-col">
-                            <div className="aspect-video rounded-xl overflow-hidden border border-zinc-800 mb-4">
-                              {project.images.length > 0 ? (
-                                <img
-                                  src={project.images[0].src}
-                                  alt={project.images[0].alt}
-                                  className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-300"
-                                />
-                              ) : (
-                                <div className="w-full h-full flex items-center justify-center bg-zinc-800/50 text-zinc-600 text-sm">Screenshot coming soon</div>
-                              )}
-                            </div>
-                            <div className="flex items-center gap-2 mb-2">
-                              <h3 className="text-lg font-bold text-zinc-100 group-hover:text-blue-400 transition-colors">{project.name}</h3>
-                              {project.wip && (
-                                <span className="px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider bg-amber-500/10 border border-amber-500/30 text-amber-400 rounded-full">WIP</span>
-                              )}
-                            </div>
-                            <p className="text-sm text-zinc-400 leading-relaxed flex-grow mb-4 line-clamp-3">{project.description}</p>
-                            <a
-                              href={project.github}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="inline-flex items-center gap-2 text-sm text-blue-400 hover:text-blue-300 transition-colors"
-                            >
-                              <Github className="w-4 h-4" />
-                              View on GitHub
-                              <ExternalLink className="w-3 h-3" />
-                            </a>
-                          </div>
-                        ))}
-                      </div>
+                      <FeaturedProjectsCarousel projects={cvData.projects as Project[]} />
                       <button
                         onClick={() => handleTabChange("projects")}
                         className="px-8 py-4 bg-zinc-100 text-zinc-900 font-bold rounded-2xl hover:bg-blue-400 hover:text-white transition-all flex items-center gap-2 group"
@@ -717,18 +773,6 @@ export default function App() {
                           GitHub
                           <ExternalLink className="w-3 h-3" />
                         </a>
-                        {project.demo && (
-                          <a
-                            href={project.demo}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center gap-2 px-4 py-2 bg-zinc-800 border border-zinc-700 rounded-xl text-sm text-zinc-200 hover:border-blue-500/50 hover:text-blue-400 transition-all"
-                          >
-                            <Globe className="w-4 h-4" />
-                            Live Demo
-                            <ExternalLink className="w-3 h-3" />
-                          </a>
-                        )}
                       </div>
                       {project.images.length > 0 && (
                         project.images.length === 1 ? (
