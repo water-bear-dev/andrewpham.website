@@ -26,7 +26,8 @@ import {
   DollarSign,
   Search,
   Code,
-  FolderGit2
+  FolderGit2,
+  ChevronLeft
 } from "lucide-react";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
@@ -246,10 +247,18 @@ export const CV_DATA = {
     },
     {
       name: "FinDash",
-      description: "Privacy-first React/TypeScript dashboard for tracking net worth and FIRE progress. Runs entirely in the browser via localStorage, with portfolio analytics, budgeting, and a Monte Carlo retirement simulator.",
+      description: "FinDash is a privacy-first personal finance dashboard built with React 19, TypeScript, and Vite that helps you track net worth and progress toward FIRE (Financial Independence, Retire Early). All financial data lives in your browser via localStorage — no external database, no account required. The net worth dashboard aggregates assets and liabilities in real time, while the dedicated FIRE journey view runs Monte Carlo simulations across thousands of market scenarios to estimate retirement survival probability. A full budgeting engine handles recurring incomes and expenses, cash-flow variance analysis, and CSV import, with a financial calendar that visualises when bills, salary, and dividends land each month. The investment module tracks holdings with live yfinance pricing, XIRR/TWR performance, FIFO gains, dividend yield-on-cost, and an algorithmic rebalancing engine that calculates exact buy/sell trades to hit target allocations. Optional Google Gemini integration adds a conversational assistant for logging expenses and summarising your financial position. Automated hourly backups to a local sync folder (Google Drive, OneDrive, etc.) keep your data portable without ever leaving your device.",
       github: "https://github.com/water-bear-dev/-WIP-FinDash---Net-Worth-FIRE-Tracker",
       wip: true,
-      images: []
+      images: [
+        { src: "/images/screenshot-dashboard.png", alt: "FinDash net worth dashboard overview" },
+        { src: "/images/screenshot-expenses.png", alt: "FinDash expenses tracking with category breakdown" },
+        { src: "/images/screenshot-calendar.png", alt: "FinDash financial calendar" },
+        { src: "/images/screenshot-cash-flow.png", alt: "FinDash cash flow budget vs actual analysis" },
+        { src: "/images/screenshot-ledger.png", alt: "FinDash portfolio ledger and transactions" },
+        { src: "/images/screenshot-investments.png", alt: "FinDash investment holdings and gains breakdown" },
+        { src: "/images/screenshot-fire.png", alt: "FinDash FIRE journey with Monte Carlo simulator" }
+      ]
     }
   ]
 };
@@ -282,6 +291,70 @@ const SkillBadge: React.FC<SkillBadgeProps> = ({ skill }) => {
     <span className="px-3 py-1 text-xs font-mono bg-zinc-900 border border-zinc-800 text-zinc-400 rounded-full hover:border-blue-500/50 hover:text-blue-400 transition-colors">
       {skill}
     </span>
+  );
+};
+
+interface ProjectImageCarouselProps {
+  images: { src: string; alt: string }[];
+}
+
+const ProjectImageCarousel: React.FC<ProjectImageCarouselProps> = ({ images }) => {
+  const [index, setIndex] = useState(0);
+
+  const goTo = (next: number) => {
+    setIndex((next + images.length) % images.length);
+  };
+
+  return (
+    <div className="relative rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-950">
+      <div className="relative aspect-video">
+        <AnimatePresence mode="wait">
+          <motion.img
+            key={index}
+            src={images[index].src}
+            alt={images[index].alt}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            className="w-full h-full object-cover object-top"
+          />
+        </AnimatePresence>
+        {images.length > 1 && (
+          <>
+            <button
+              onClick={() => goTo(index - 1)}
+              className="absolute left-3 top-1/2 -translate-y-1/2 p-2 bg-zinc-900/80 border border-zinc-700 rounded-full text-zinc-300 hover:text-white hover:border-blue-500/50 transition-all"
+              aria-label="Previous image"
+            >
+              <ChevronLeft className="w-5 h-5" />
+            </button>
+            <button
+              onClick={() => goTo(index + 1)}
+              className="absolute right-3 top-1/2 -translate-y-1/2 p-2 bg-zinc-900/80 border border-zinc-700 rounded-full text-zinc-300 hover:text-white hover:border-blue-500/50 transition-all"
+              aria-label="Next image"
+            >
+              <ChevronRight className="w-5 h-5" />
+            </button>
+          </>
+        )}
+      </div>
+      {images.length > 1 && (
+        <div className="flex items-center justify-between px-4 py-3 bg-zinc-900/50 border-t border-zinc-800">
+          <p className="text-sm text-zinc-400 truncate">{images[index].alt}</p>
+          <div className="flex items-center gap-1.5 shrink-0 ml-4">
+            {images.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setIndex(i)}
+                className={`w-2 h-2 rounded-full transition-all ${i === index ? "bg-blue-400 w-5" : "bg-zinc-600 hover:bg-zinc-500"}`}
+                aria-label={`Go to image ${i + 1}`}
+              />
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
   );
 };
 
@@ -659,17 +732,7 @@ export default function App() {
                             />
                           </div>
                         ) : (
-                          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                            {project.images.map((image: { src: string; alt: string }, j: number) => (
-                              <div key={j} className="rounded-xl overflow-hidden border border-zinc-800">
-                                <img
-                                  src={image.src}
-                                  alt={image.alt}
-                                  className="w-full aspect-video object-cover object-top"
-                                />
-                              </div>
-                            ))}
-                          </div>
+                          <ProjectImageCarousel images={project.images} />
                         )
                       )}
                     </div>
