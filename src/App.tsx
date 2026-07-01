@@ -196,10 +196,13 @@ export const CV_DATA = {
     }
   ],
   certifications: [
+    { title: "AWS Generative AI Practitioner", issuer: "Amazon Web Services", date: "May 2026" },
+    { title: "LaunchDarkly Developer Foundations", issuer: "LaunchDarkly", date: "May 2026" },
     { title: "Solutions Architect Professional", issuer: "Amazon Web Services", date: "January 2025" },
     { title: "Data Engineer Associate", issuer: "Amazon Web Services", date: "July 2024" },
     { title: "Certified Banking Fundamentals", issuer: "FINSIA", date: "July 2024" },
-    { title: "Solutions Architect Associate", issuer: "Amazon Web Services", date: "December 2023" }
+    { title: "Solutions Architect Associate", issuer: "Amazon Web Services", date: "December 2023" },
+    { title: "Microsoft Certified: Azure Fundamentals", issuer: "Microsoft", date: "" }
   ],
   education: [
     {
@@ -218,8 +221,9 @@ export const CV_DATA = {
   ],
   awards: [
     { title: "Systems Developer Coding Challenge – Winner", issuer: "AWS", date: "November 2025" },
-    { title: "Tri-Country Coding Tournament - Winner", issuer: "NAB", date: "April 2023" },
-    { title: "Expert Coding Competition - Winner", issuer: "NAB", date: "2022" }
+    { title: "Tri-Country Coding Tournament – Winner", issuer: "NAB", date: "April 2023" },
+    { title: "Faculty of IT International Merit Scholarship", issuer: "Monash University", date: "" },
+    { title: "Monash Industry Team Initiative (MITI) Scholarship", issuer: "Monash University", date: "" }
   ],
   projects: [
     // Work Projects
@@ -816,13 +820,13 @@ export default function App() {
             {activeTab === "projects" && (
               <section className="mb-24">
                 <SectionHeader icon={FolderGit2} title="Work Projects" />
-                <div className="space-y-12 mb-16">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
                   {(cvData.projects as any[]).filter(p => p.type === 'work').map((project, i) => (
-                    <div key={i} className="p-8 bg-zinc-900/50 border border-zinc-800 rounded-3xl hover:border-blue-500/30 transition-all">
+                    <div key={i} className="p-8 bg-zinc-900/50 border border-zinc-800 rounded-3xl hover:border-blue-500/30 transition-all flex flex-col h-full">
                       <div className="flex flex-wrap items-center gap-3 mb-4">
                         <h3 className="text-2xl font-bold text-zinc-100">{project.name}</h3>
                       </div>
-                      <p className="text-zinc-400 text-base leading-relaxed mb-6 max-w-3xl">{project.description}</p>
+                      <p className="text-zinc-400 text-base leading-relaxed mb-6 flex-grow">{project.description}</p>
                       {project.link && project.link !== "#" && (
                         <div className="flex flex-wrap items-center gap-4 mb-8">
                           <a
@@ -854,16 +858,16 @@ export default function App() {
                 </div>
 
                 <SectionHeader icon={FolderGit2} title="Personal Projects" />
-                <div className="space-y-12">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                   {(cvData.projects as any[]).filter(p => p.type === 'personal').map((project, i) => (
-                    <div key={i} className="p-8 bg-zinc-900/50 border border-zinc-800 rounded-3xl hover:border-blue-500/30 transition-all">
+                    <div key={i} className="p-8 bg-zinc-900/50 border border-zinc-800 rounded-3xl hover:border-blue-500/30 transition-all flex flex-col h-full">
                       <div className="flex flex-wrap items-center gap-3 mb-4">
                         <h3 className="text-2xl font-bold text-zinc-100">{project.name}</h3>
                         {project.wip && (
                           <span className="px-3 py-1 text-xs font-bold uppercase tracking-wider bg-amber-500/10 border border-amber-500/30 text-amber-400 rounded-full">Work in Progress</span>
                         )}
                       </div>
-                      <p className="text-zinc-400 text-base leading-relaxed mb-6 max-w-3xl">{project.description}</p>
+                      <p className="text-zinc-400 text-base leading-relaxed mb-6 flex-grow">{project.description}</p>
                       <div className="flex flex-wrap items-center gap-4 mb-8">
                         {project.github && (
                           <a
