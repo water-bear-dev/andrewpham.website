@@ -14,64 +14,63 @@ const newProjectsCode = `projects: [
     // Work Projects
     {
       name: "Polyfeed",
-      description: "Designed and implemented a React-based feedback platform for students and tutors. The site incorporated ChatGPT to help students analyse strengths and weaknesses after an assignment.",
-      link: "#",
+      description: "React feedback platform for students and tutors with ChatGPT-powered assignment insights.",
+      link: "https://www.polyfeed.com.au",
       type: "work",
       images: [{ src: "/images/polyfeed.png", alt: "Polyfeed platform UI" }]
     },
     {
       name: "Turning Point / NAHMSU Database Revamp",
-      description: "Spearheaded the redesign and development of database architecture, migrating from Microsoft Access to Microsoft SQL Server. Built analytics dashboards using Tableau for research insights into patient behaviour, deployed on Azure.",
+      description: "Migrated Microsoft Access to SQL Server and built Tableau dashboards for patient research.",
       link: "https://www.turningpoint.org.au/about-us",
       type: "work",
       images: [{ src: "/images/turning_point_db.png", alt: "Turning Point Database Dashboard" }]
     },
     {
       name: "MyWizard STACK Monitoring",
-      description: "Optimised the team’s Splunk environment, creating dashboards, refining searches, and resolving bugs for global clients as a Technical Analyst with Accenture. Integrated AI and Python for advanced IT infrastructure oversight.",
+      description: "Optimized Splunk monitoring with dashboards, search tuning, and Python automation.",
       link: "https://www.accenture.com/content/dam/accenture/final/a-com-migration/manual/r3/pdf/pdf-108/Accenture-MyWizard.pdf",
       type: "work",
       images: [{ src: "/images/mywizard_stack.png", alt: "MyWizard STACK Monitoring Dashboard" }]
     },
     {
       name: "NAB AWS Migration",
-      description: "Migrated on-premise Telephone Banking platform and contact centre from Genesys to AWS during my time as a data and software engineer at NAB.",
+      description: "Migrated NAB’s Telephone Banking contact centre from Genesys to AWS.",
       link: "https://aws.amazon.com/solutions/case-studies/national-australia-bank-digital-transformation-case-study/",
       type: "work",
       images: []
     },
     {
       name: "Onboarding Harness CI/CD for Kubernetes",
-      description: "Implemented an Onboarding Harness for Robust CI/CD pipelines targeting Kubernetes instances at NAB, improving deployment reliability.",
+      description: "Built reliable Kubernetes CI/CD pipelines using Harness.",
       link: "https://www.harness.io/case-studies/national-australia-bank",
       type: "work",
       images: []
     },
     {
       name: "Splunk to OpenSearch Migration",
-      description: "Migrated logging infrastructure from Splunk to OpenSearch at NAB, focusing on reducing false positives through algorithmic improvements.",
+      description: "Migrated NAB logging from Splunk to OpenSearch to reduce false positives.",
       link: "https://opensearch.org/blog/reducing-false-positives-through-algorithmic-improvements/",
       type: "work",
       images: []
     },
     {
       name: "Monash University Mentoring",
-      description: "Mentoring undergraduate and post-graduate students in Web Development and Data Visualisation as a Teaching Associate. Guided students in creating web solutions for capstone projects.",
+      description: "Mentored students in web development and data visualisation projects.",
       link: "https://pgie.infotech.monash.edu/ug/",
       type: "work",
       images: []
     },
     {
       name: "NAB Context Engineering Library (CEL)",
-      description: "Contributed to the NAB Context Engineering Library (CEL) in Cursor, enhancing AI autocomplete and contextual code generation for developers.",
+      description: "Enhanced Cursor’s NAB CEL for AI-assisted coding and autocomplete.",
       link: "https://cursor.com/blog/nab",
       type: "work",
       images: []
     },
-    // Personal Projects
     {
       name: "AU Real Estate Insights",
-      description: "Chrome extension and Vercel backend that enriches realestate.com.au and domain.com.au listings with verified land size, nearby school catchments, and Better Education ratings. Uses a hybrid architecture with client-side scraping via residential IP and serverless geocoding.",
+      description: "Browser extension enriching Australian property listings with land size and school catchment data.",
       github: "https://github.com/water-bear-dev/au-rea-insights",
       type: "personal",
       images: [
@@ -80,7 +79,7 @@ const newProjectsCode = `projects: [
     },
     {
       name: "Cost-Aware Market Insights Engine",
-      description: "Containerized FastAPI application with LangGraph orchestration that ingests live market data, synthesizes AI insights via Bedrock/Ollama, and surfaces them on a glassmorphic dashboard — with strict FinOps budget gates that throttle LLM spend.",
+      description: "FastAPI app that ingests market data and delivers FinOps-aware AI insights.",
       github: "https://github.com/water-bear-dev/Cost-Aware-Market-Insights-Engine",
       type: "personal",
       images: [
@@ -95,7 +94,7 @@ const newProjectsCode = `projects: [
     },
     {
       name: "AWS Certification Prep Engine",
-      description: "Interactive TypeScript study platform for AWS certifications, covering eight exams including Solutions Architect, Machine Learning Engineer, and Data Engineer. Features practice mode with instant explanations, timed exam simulation, domain-targeted drills, and post-exam proficiency breakdowns — all in a responsive dark-mode UI.",
+      description: "TypeScript study platform with timed practice and AWS exam drills.",
       github: "https://github.com/water-bear-dev/aws-cert-prep",
       type: "personal",
       images: [
@@ -104,19 +103,11 @@ const newProjectsCode = `projects: [
     },
     {
       name: "FinDash",
-      description: "FinDash is a privacy-first personal finance dashboard built with React 19, TypeScript, and Vite that helps you track net worth and progress toward FIRE (Financial Independence, Retire Early). All financial data lives in your browser via localStorage — no external database, no account required. The net worth dashboard aggregates assets and liabilities in real time, while the dedicated FIRE journey view runs Monte Carlo simulations across thousands of market scenarios to estimate retirement survival probability. A full budgeting engine handles recurring incomes and expenses, cash-flow variance analysis, and CSV import, with a financial calendar that visualises when bills, salary, and dividends land each month. The investment module tracks holdings with live yfinance pricing, XIRR/TWR performance, FIFO gains, dividend yield-on-cost, and an algorithmic rebalancing engine that calculates exact buy/sell trades to hit target allocations. Optional Google Gemini integration adds a conversational assistant for logging expenses and summarising your financial position. Automated hourly backups to a local sync folder (Google Drive, OneDrive, etc.) keep your data portable without ever leaving your device.",
+      description: "Privacy-first React finance dashboard for net worth, budgeting, investments, and FIRE planning.",
       github: "https://github.com/water-bear-dev/-WIP-FinDash---Net-Worth-FIRE-Tracker",
       wip: true,
       type: "personal",
-      images: [
-        { src: "/images/screenshot-dashboard.png", alt: "FinDash net worth dashboard overview" },
-        { src: "/images/screenshot-expenses.png", alt: "FinDash expenses tracking with category breakdown" },
-        { src: "/images/screenshot-calendar.png", alt: "FinDash financial calendar" },
-        { src: "/images/screenshot-cash-flow.png", alt: "FinDash cash flow budget vs actual analysis" },
-        { src: "/images/screenshot-ledger.png", alt: "FinDash portfolio ledger and transactions" },
-        { src: "/images/screenshot-investments.png", alt: "FinDash investment holdings and gains breakdown" },
-        { src: "/images/screenshot-fire.png", alt: "FinDash FIRE journey with Monte Carlo simulator" }
-      ]
+      images: []
     }
   ]`;
 
