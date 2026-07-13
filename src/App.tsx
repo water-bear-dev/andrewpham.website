@@ -919,7 +919,8 @@ export default function App() {
                                     </div>
                                   ) : (
                                     <ProjectImageCarousel images={project.images} />
-                                  )}
+                                  )
+                                )}
                               </div>
                             ))}
                           </div>
