@@ -841,21 +841,42 @@ export default function App() {
                     }
                   ];
                   const remainingProjects = workProjects.filter(p => !groups.some(group => group.projects.includes(p)));
+                  const companySubtitles: { [k: string]: string } = {
+                    'National Australia Bank': 'Enterprise banking — cloud data platforms & analytics',
+                    'Monash University': 'Research, teaching and student-facing platforms',
+                    'Accenture': 'Consulting delivery: monitoring, observability & automation'
+                  };
 
                   return (
                     <>
                       {groups.map((group, gi) => (
                         <div key={gi} className="mb-12">
                           <h3 className="text-2xl font-semibold text-zinc-100 mb-6 border-b border-zinc-800 pb-3">{group.label}</h3>
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                          <p className="text-sm text-zinc-400 mt-2 mb-6">{companySubtitles[group.label]}</p>
+                          <div className="grid grid-cols-1 gap-8">
                             {group.projects.map((project, i) => (
                               <div key={i} className="p-8 bg-zinc-900/50 border border-zinc-800 rounded-3xl hover:border-blue-500/30 transition-all flex flex-col h-full">
-                                <div className="flex flex-wrap items-center gap-3 mb-4">
-                                  <h3 className="text-2xl font-bold text-zinc-100">{project.name}</h3>
+                                <div>
+                                  <div className="flex flex-wrap items-center gap-3 mb-4">
+                                    <h3 className="text-2xl font-bold text-zinc-100">{project.name}</h3>
+                                  </div>
+                                  <p className="text-zinc-400 text-base leading-relaxed mb-6">{project.description}</p>
+                                  {project.images && project.images.length > 0 && (
+                                    project.images.length === 1 ? (
+                                      <div className="rounded-2xl overflow-hidden border border-zinc-800 mb-8">
+                                        <img
+                                          src={project.images[0].src}
+                                          alt={project.images[0].alt}
+                                          className="w-full object-cover object-top"
+                                        />
+                                      </div>
+                                    ) : (
+                                      <div className="mb-8"><ProjectImageCarousel images={project.images} /></div>
+                                    )
+                                  )}
                                 </div>
-                                <p className="text-zinc-400 text-base leading-relaxed mb-6 flex-grow">{project.description}</p>
                                 {project.link && project.link !== "#" && (
-                                  <div className="flex flex-wrap items-center gap-4 mb-8">
+                                  <div className="mt-auto flex items-start gap-4">
                                     <a
                                       href={project.link}
                                       target="_blank"
@@ -866,19 +887,6 @@ export default function App() {
                                       View Project
                                     </a>
                                   </div>
-                                )}
-                                {project.images && project.images.length > 0 && (
-                                  project.images.length === 1 ? (
-                                    <div className="rounded-2xl overflow-hidden border border-zinc-800">
-                                      <img
-                                        src={project.images[0].src}
-                                        alt={project.images[0].alt}
-                                        className="w-full object-cover object-top"
-                                      />
-                                    </div>
-                                  ) : (
-                                    <ProjectImageCarousel images={project.images} />
-                                  )
                                 )}
                               </div>
                             ))}
@@ -888,15 +896,31 @@ export default function App() {
                       {remainingProjects.length > 0 && (
                         <div className="mb-12">
                           <h3 className="text-2xl font-semibold text-zinc-100 mb-6 border-b border-zinc-800 pb-3">Other Work Projects</h3>
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                          <p className="text-sm text-zinc-400 mt-2 mb-6">Other internal and freelance work.</p>
+                          <div className="grid grid-cols-1 gap-8">
                             {remainingProjects.map((project, i) => (
                               <div key={i} className="p-8 bg-zinc-900/50 border border-zinc-800 rounded-3xl hover:border-blue-500/30 transition-all flex flex-col h-full">
-                                <div className="flex flex-wrap items-center gap-3 mb-4">
-                                  <h3 className="text-2xl font-bold text-zinc-100">{project.name}</h3>
+                                <div>
+                                  <div className="flex flex-wrap items-center gap-3 mb-4">
+                                    <h3 className="text-2xl font-bold text-zinc-100">{project.name}</h3>
+                                  </div>
+                                  <p className="text-zinc-400 text-base leading-relaxed mb-6">{project.description}</p>
+                                  {project.images && project.images.length > 0 && (
+                                    project.images.length === 1 ? (
+                                      <div className="rounded-2xl overflow-hidden border border-zinc-800 mb-8">
+                                        <img
+                                          src={project.images[0].src}
+                                          alt={project.images[0].alt}
+                                          className="w-full object-cover object-top"
+                                        />
+                                      </div>
+                                    ) : (
+                                      <div className="mb-8"><ProjectImageCarousel images={project.images} /></div>
+                                    )
+                                  )}
                                 </div>
-                                <p className="text-zinc-400 text-base leading-relaxed mb-6 flex-grow">{project.description}</p>
                                 {project.link && project.link !== "#" && (
-                                  <div className="flex flex-wrap items-center gap-4 mb-8">
+                                  <div className="mt-auto flex items-start gap-4">
                                     <a
                                       href={project.link}
                                       target="_blank"
@@ -907,19 +931,6 @@ export default function App() {
                                       View Project
                                     </a>
                                   </div>
-                                )}
-                                {project.images && project.images.length > 0 && (
-                                  project.images.length === 1 ? (
-                                    <div className="rounded-2xl overflow-hidden border border-zinc-800">
-                                      <img
-                                        src={project.images[0].src}
-                                        alt={project.images[0].alt}
-                                        className="w-full object-cover object-top"
-                                      />
-                                    </div>
-                                  ) : (
-                                    <ProjectImageCarousel images={project.images} />
-                                  )
                                 )}
                               </div>
                             ))}
@@ -931,17 +942,32 @@ export default function App() {
                 })()}
 
                 <SectionHeader icon={FolderGit2} title="Personal Projects" />
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-8">
                   {(cvData.projects as any[]).filter(p => p.type === 'personal').map((project, i) => (
                     <div key={i} className="p-8 bg-zinc-900/50 border border-zinc-800 rounded-3xl hover:border-blue-500/30 transition-all flex flex-col h-full">
-                      <div className="flex flex-wrap items-center gap-3 mb-4">
-                        <h3 className="text-2xl font-bold text-zinc-100">{project.name}</h3>
-                        {project.wip && (
-                          <span className="px-3 py-1 text-xs font-bold uppercase tracking-wider bg-amber-500/10 border border-amber-500/30 text-amber-400 rounded-full">Work in Progress</span>
+                      <div>
+                        <div className="flex flex-wrap items-center gap-3 mb-4">
+                          <h3 className="text-2xl font-bold text-zinc-100">{project.name}</h3>
+                          {project.wip && (
+                            <span className="px-3 py-1 text-xs font-bold uppercase tracking-wider bg-amber-500/10 border border-amber-500/30 text-amber-400 rounded-full">Work in Progress</span>
+                          )}
+                        </div>
+                        <p className="text-zinc-400 text-base leading-relaxed mb-6">{project.description}</p>
+                        {project.images && project.images.length > 0 && (
+                          project.images.length === 1 ? (
+                            <div className="rounded-2xl overflow-hidden border border-zinc-800 mb-8">
+                              <img
+                                src={project.images[0].src}
+                                alt={project.images[0].alt}
+                                className="w-full object-cover object-top"
+                              />
+                            </div>
+                          ) : (
+                            <div className="mb-8"><ProjectImageCarousel images={project.images} /></div>
+                          )
                         )}
                       </div>
-                      <p className="text-zinc-400 text-base leading-relaxed mb-6 flex-grow">{project.description}</p>
-                      <div className="flex flex-wrap items-center gap-4 mb-8">
+                      <div className="mt-auto flex items-start gap-4">
                         {project.github && (
                           <a
                             href={project.github}
@@ -955,19 +981,6 @@ export default function App() {
                           </a>
                         )}
                       </div>
-                      {project.images && project.images.length > 0 && (
-                        project.images.length === 1 ? (
-                          <div className="rounded-2xl overflow-hidden border border-zinc-800">
-                            <img
-                              src={project.images[0].src}
-                              alt={project.images[0].alt}
-                              className="w-full object-cover object-top"
-                            />
-                          </div>
-                        ) : (
-                          <ProjectImageCarousel images={project.images} />
-                        )
-                      )}
                     </div>
                   ))}
                 </div>
