@@ -4,7 +4,7 @@
 
 # Andrew Pham | Personal Portfolio & CV
 
-This is a modern, interactive single-page React portfolio for Andrew Pham, a Senior Software & Data Engineer. The site highlights professional experience, technical skills, services offered, and includes a Generative AI assistant to chat interactively about Andrew's qualifications.
+This is a modern, interactive single-page React portfolio for Andrew Pham, a Data & AI Software Engineer. The site highlights professional experience, technical skills, services offered, and includes a Generative AI assistant to chat interactively about Andrew's qualifications.
 
 ## Features
 - **Dynamic React Portfolio:** Fully responsive and styled with Tailwind CSS (`@tailwindcss/vite` v4).

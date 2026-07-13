@@ -37,7 +37,7 @@ import { ChatBot } from "./components/ChatBot";
 
 export const CV_DATA = {
   name: "Andrew Pham",
-  title: "Senior Software & Data Engineer",
+  title: "Data & AI Software Engineer",
   specialization: "AWS, Python & AI",
   location: "Australia",
   email: "andrew.hn.pham@gmail.com",
@@ -63,8 +63,8 @@ export const CV_DATA = {
   introduction: {
     greeting: "Hello there!",
     welcome: "I'm Andrew Pham, and it's genuinely a pleasure to welcome you to my corner. Thank you for taking the time to visit my site.",
-    professional: "I am a Senior Software & Data Engineer with 5+ years of experience across multiple industries, specialising in building robust, efficient, and scalable data pipelines.",
-    summary: "Skilled in Python, TypeScript, data streaming, and AWS, I have a proven track record of designing fault-tolerant cloud infrastructures and turning raw data into actionable insights.",
+    professional: "I am a Data & AI Software Engineer with 5+ years building production PySpark and SQL pipelines on AWS and Databricks.",
+    summary: "I operate governed lakehouse and warehouse workloads at scale, tune performance through schema design and partitioning, and translate data problems into scalable solutions.",
     achievements: [
       "Designed, deployed, and maintained large-scale, fault-tolerant critical cloud infrastructures in AWS.",
       "Introduced GenAI into NAB's customer contact centre.",
@@ -74,13 +74,12 @@ export const CV_DATA = {
     closing: "Throughout my career, I've focused on creating reliable data architectures that empower businesses to make informed decisions. Whether it's optimising existing systems, developing new data solutions, or troubleshooting complex challenges, I'm always driven by a commitment to quality and a desire to deliver high-quality results."
   },
   skills: [
-    { category: "Data Platforms", items: ["RDS", "DynamoDB", "Redshift", "PostgreSQL", "dbt"] },
-    { category: "Cloud", items: ["S3", "EC2", "CloudFormation", "Lambda", "ECS", "EKS", "IAM", "DMS", "SNS", "SQS", "Lake Formation", "Glue", "EMR", "API Gateway"] },
-    { category: "IaC", items: ["Docker", "Terraform", "Kubernetes"] },
+    { category: "Data Engineering", items: ["PySpark", "SQL", "ETL/ELT", "Dimensional modelling", "Data quality", "SLA monitoring"] },
+    { category: "AWS Data Platforms", items: ["S3", "Lambda", "Glue", "Athena", "Lake Formation", "Redshift", "Databricks", "Iceberg lakehouse", "Airflow"] },
+    { category: "Delivery & Stakeholders", items: ["Client-facing delivery", "Architecture patterns", "Reusable integration assets", "Terraform", "Jenkins", "Mentoring", "Teaching"] },
     { category: "Languages", items: ["Python", "PySpark", "SQL", "TypeScript", "JavaScript", "Bash"] },
     { category: "Streaming & Observability", items: ["Spark", "CloudWatch", "Confluent Kafka", "Tableau", "Splunk"] },
-    { category: "Version Control", items: ["Git", "Harness", "Jenkins"] },
-    { category: "Tools & Practices", items: ["Agile", "Scrum", "KMS", "SSM", "ServiceNow", "Jira", "Confluence"] }
+    { category: "Version Control", items: ["Git", "Harness", "Jenkins"] }
   ],
   experience: [
     {
@@ -88,28 +87,30 @@ export const CV_DATA = {
       location: "Melbourne, VIC, Australia",
       roles: [
         {
-          title: "Senior Software & Data Engineer",
+          title: "Senior Data & AI Engineer",
           period: "November 2024 – Present",
           team: "Customer Contact Centre (CCT) - formerly Frontline and Sales Technology (FAST)",
-          description: "My responsibilities include designing and implementing scalable, high-performance data pipelines to process and transform large volumes of structured and unstructured data using Spark, Python and API Gateway, reducing data processing time by 40% and enabling near-real-time insights for business stakeholders.",
+          description: "Operate AWS and Databricks data services with Python/PySpark and SQL; monitor pipeline health, SLAs, and data quality at 99.9%+ uptime.",
           highlights: [
-            "Built real-time streaming data pipelines using Apache Kafka and Kinesis, enabling the detection of anomalies and fraud in customer interactions.",
-            "Implemented load balancers, real-time monitoring and alerting using CloudWatch, reducing MTTD and MTTR by 50%."
+            "Drove cloud data architecture optimisation delivering ~$2M capex reduction through workload right-sizing and schema standardisation.",
+            "Built automated CI/CD for platform and data releases, reducing hotfix delivery from weeks to under 48 hours.",
+            "Co-created reusable integration patterns adopted by 400+ engineers and led architecture discussions with platform and product teams.",
+            "Monitored governed lakehouse and warehouse workloads with observability best practices to maintain production reliability."
           ],
-          techStack: ["TypeScript", "AWS", "OpenSearch", "Python", "SQL"]
+          techStack: ["Python", "PySpark", "SQL", "AWS", "Databricks", "Glue", "Airflow"]
         },
         {
           title: "Data Engineer",
           period: "November 2021 – October 2024",
           team: "Assisted eXperience Technologies (AXT)",
-          description: "Within NAB’s Assisted eXperience Technologies (AXT), I contribute to the SoundWave squad, focusing on NAB’s Telephone Banking and Contact Centre operations. My responsibilities include optimising customer interactions through enhanced self-service options and seamless routing to appropriate agents.",
+          description: "Built PySpark and SQL ETL/ELT pipelines processing 2 TB+ monthly into governed warehouses and lakes using Airflow and Kafka with a 99.9% SLA.",
           highlights: [
-            "Migrated on-premise Telephone Banking platform and contact centre from Genesys to AWS.",
-            "Maintenance and refactoring of existing service APIs and back ends.",
-            "Improved the development pipeline process, reducing automated testing time by 32%.",
-            "Winner of 2022 NAB’s Expert coding competition."
+            "Tuned warehouse query performance, partitioning, and resource allocation to improve processing speed by 40%.",
+            "Achieved a 25% YoY reduction in P1/P2 incidents through monitoring, RCA, and continual improvement.",
+            "Delivered 4 reusable integration assets that cut deployment time by 30%.",
+            "Mentored junior engineers on pipeline standards, Git workflows, and operational runbooks."
           ],
-          techStack: ["TypeScript", "AWS", "Splunk", "SQL"]
+          techStack: ["Python", "PySpark", "SQL", "AWS", "Airflow", "Kafka"]
         }
       ]
     },
@@ -812,42 +813,121 @@ export default function App() {
             {activeTab === "projects" && (
               <section className="mb-24">
                 <SectionHeader icon={FolderGit2} title="Work Projects" />
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-                  {(cvData.projects as any[]).filter(p => p.type === 'work').map((project, i) => (
-                    <div key={i} className="p-8 bg-zinc-900/50 border border-zinc-800 rounded-3xl hover:border-blue-500/30 transition-all flex flex-col h-full">
-                      <div className="flex flex-wrap items-center gap-3 mb-4">
-                        <h3 className="text-2xl font-bold text-zinc-100">{project.name}</h3>
-                      </div>
-                      <p className="text-zinc-400 text-base leading-relaxed mb-6 flex-grow">{project.description}</p>
-                      {project.link && project.link !== "#" && (
-                        <div className="flex flex-wrap items-center gap-4 mb-8">
-                          <a
-                            href={project.link}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center gap-2 px-4 py-2 bg-zinc-800 border border-zinc-700 rounded-xl text-sm text-zinc-200 hover:border-blue-500/50 hover:text-blue-400 transition-all"
-                          >
-                            <ExternalLink className="w-4 h-4" />
-                            View Project
-                          </a>
+                {(() => {
+                  const workProjects = (cvData.projects as any[]).filter(p => p.type === 'work');
+                  const groups = [
+                    {
+                      label: 'National Australia Bank',
+                      projects: workProjects.filter(p => [
+                        'NAB AWS Migration',
+                        'Splunk to OpenSearch Migration',
+                        'NAB Context Engineering Library (CEL)',
+                        'Onboarding Harness CI/CD for Kubernetes'
+                      ].includes(p.name))
+                    },
+                    {
+                      label: 'Monash University',
+                      projects: workProjects.filter(p => [
+                        'Polyfeed',
+                        'Monash University Mentoring',
+                        'Turning Point / NAHMSU Database Revamp'
+                      ].includes(p.name))
+                    },
+                    {
+                      label: 'Accenture',
+                      projects: workProjects.filter(p => [
+                        'MyWizard STACK Monitoring'
+                      ].includes(p.name))
+                    }
+                  ];
+                  const remainingProjects = workProjects.filter(p => !groups.some(group => group.projects.includes(p)));
+
+                  return (
+                    <>
+                      {groups.map((group, gi) => (
+                        <div key={gi} className="mb-12">
+                          <h3 className="text-2xl font-semibold text-zinc-100 mb-6 border-b border-zinc-800 pb-3">{group.label}</h3>
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            {group.projects.map((project, i) => (
+                              <div key={i} className="p-8 bg-zinc-900/50 border border-zinc-800 rounded-3xl hover:border-blue-500/30 transition-all flex flex-col h-full">
+                                <div className="flex flex-wrap items-center gap-3 mb-4">
+                                  <h3 className="text-2xl font-bold text-zinc-100">{project.name}</h3>
+                                </div>
+                                <p className="text-zinc-400 text-base leading-relaxed mb-6 flex-grow">{project.description}</p>
+                                {project.link && project.link !== "#" && (
+                                  <div className="flex flex-wrap items-center gap-4 mb-8">
+                                    <a
+                                      href={project.link}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      className="inline-flex items-center gap-2 px-4 py-2 bg-zinc-800 border border-zinc-700 rounded-xl text-sm text-zinc-200 hover:border-blue-500/50 hover:text-blue-400 transition-all"
+                                    >
+                                      <ExternalLink className="w-4 h-4" />
+                                      View Project
+                                    </a>
+                                  </div>
+                                )}
+                                {project.images && project.images.length > 0 && (
+                                  project.images.length === 1 ? (
+                                    <div className="rounded-2xl overflow-hidden border border-zinc-800">
+                                      <img
+                                        src={project.images[0].src}
+                                        alt={project.images[0].alt}
+                                        className="w-full object-cover object-top"
+                                      />
+                                    </div>
+                                  ) : (
+                                    <ProjectImageCarousel images={project.images} />
+                                  )
+                                )}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      ))}
+                      {remainingProjects.length > 0 && (
+                        <div className="mb-12">
+                          <h3 className="text-2xl font-semibold text-zinc-100 mb-6 border-b border-zinc-800 pb-3">Other Work Projects</h3>
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            {remainingProjects.map((project, i) => (
+                              <div key={i} className="p-8 bg-zinc-900/50 border border-zinc-800 rounded-3xl hover:border-blue-500/30 transition-all flex flex-col h-full">
+                                <div className="flex flex-wrap items-center gap-3 mb-4">
+                                  <h3 className="text-2xl font-bold text-zinc-100">{project.name}</h3>
+                                </div>
+                                <p className="text-zinc-400 text-base leading-relaxed mb-6 flex-grow">{project.description}</p>
+                                {project.link && project.link !== "#" && (
+                                  <div className="flex flex-wrap items-center gap-4 mb-8">
+                                    <a
+                                      href={project.link}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      className="inline-flex items-center gap-2 px-4 py-2 bg-zinc-800 border border-zinc-700 rounded-xl text-sm text-zinc-200 hover:border-blue-500/50 hover:text-blue-400 transition-all"
+                                    >
+                                      <ExternalLink className="w-4 h-4" />
+                                      View Project
+                                    </a>
+                                  </div>
+                                )}
+                                {project.images && project.images.length > 0 && (
+                                  project.images.length === 1 ? (
+                                    <div className="rounded-2xl overflow-hidden border border-zinc-800">
+                                      <img
+                                        src={project.images[0].src}
+                                        alt={project.images[0].alt}
+                                        className="w-full object-cover object-top"
+                                      />
+                                    </div>
+                                  ) : (
+                                    <ProjectImageCarousel images={project.images} />
+                                  )}
+                              </div>
+                            ))}
+                          </div>
                         </div>
                       )}
-                      {project.images && project.images.length > 0 && (
-                        project.images.length === 1 ? (
-                          <div className="rounded-2xl overflow-hidden border border-zinc-800">
-                            <img
-                              src={project.images[0].src}
-                              alt={project.images[0].alt}
-                              className="w-full object-cover object-top"
-                            />
-                          </div>
-                        ) : (
-                          <ProjectImageCarousel images={project.images} />
-                        )
-                      )}
-                    </div>
-                  ))}
-                </div>
+                    </>
+                  );
+                })()}
 
                 <SectionHeader icon={FolderGit2} title="Personal Projects" />
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -899,7 +979,7 @@ export default function App() {
                 {/* Skills Sub-section */}
                 <section>
                   <SectionHeader icon={Code2} title="Technical Arsenal" />
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  <div className="grid grid-cols-1 gap-6">
                     {cvData.skills.map((skillGroup: any, i: number) => {
                       const Icon = {
                         "Data Platforms": Database,
